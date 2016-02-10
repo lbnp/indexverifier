@@ -9,7 +9,9 @@ int main()
     uint32_t hits = 0;
 
     for (auto index: indices) {
-        if (std::find(cache.begin(), cache.end(), index) != cache.end()) {
+        if ((auto iter = std::find(cache.begin(), cache.end(), index)) != cache.end()) {
+            cache.erase(iter);
+            cache.push_back(index);
             hits++;
         } else {
             // LRU
